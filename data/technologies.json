@@ -1,0 +1,213 @@
+﻿{
+    "schemaVersion":  1,
+    "technologies":  [
+                         {
+                             "id":  "park-1020220067778",
+                             "visibility":  "public",
+                             "title":  "암 조직 표적형 인체 유래 유산균 종양 성장 억제 균주",
+                             "titleLines":  [
+                                                [
+                                                    "암 조직 표적형",
+                                                    "인체 유래 유산균"
+                                                ],
+                                                [
+                                                    "종양 성장 억제 균주"
+                                                ]
+                                            ],
+                             "summary":  "암 조직 선택적 집적과 자체 항암 활성을 함께 확인한 락티카제이바실러스 파라카제이 균주",
+                             "researcher":  "박승환",
+                             "organization":  "한국생명공학연구원",
+                             "classification":  {
+                                                    "major":  "바이오·의료",
+                                                    "middle":  "의약바이오",
+                                                    "minor":  "마이크로바이옴 치료제",
+                                                    "extension":  "균주·약물전달 플랫폼"
+                                                },
+                             "strain":  {
+                                            "depositNumber":  "KCTC 14228BP",
+                                            "depositDate":  "2020.07.06",
+                                            "microorganismName":  "Lacticaseibacillus paracasei KGMB04157",
+                                            "microorganismType":  "세균",
+                                            "aliases":  [
+                                                            "KGMB04157",
+                                                            "V1bio04157",
+                                                            "BCT04157"
+                                                        ],
+                                            "origin":  "한국인 장내 마이크로바이옴 유래",
+                                            "coreFeature":  "암 조직 표적 집적, 자체 항암 활성, 진단·전달 플랫폼 확장성"
+                                        },
+                             "patent":  {
+                                            "title":  "락티카제이바실러스 속 또는 락토바실러스 속 균주를 유효성분으로 포함하는 암 진단, 예방 또는 치료용 조성물",
+                                            "number":  "10-2833393",
+                                            "differentiators":  [
+                                                                    "병원성 균주가 아닌 인체 유래 유산균을 활용",
+                                                                    "대장암·유방암 동물모델에서 종양 선택적 집적 확인",
+                                                                    "균주 단독 항암 활성과 약물·영상물질 전달체 활용 가능"
+                                                                ]
+                                        },
+                             "experiments":  [
+                                                 {
+                                                     "title":  "종양 표적성 평가",
+                                                     "method":  "대장암·유방암 모델 투여 → 5일 후 종양 생균수 측정",
+                                                     "result":  "종양 조직 내 고농도 균주 집적"
+                                                 },
+                                                 {
+                                                     "title":  "동물모델 항암효과 평가",
+                                                     "method":  "대장암·유방암 모델 투여 → 종양 부피 추적",
+                                                     "result":  "대조군 대비 종양 성장 억제"
+                                                 },
+                                                 {
+                                                     "title":  "다양한 암종 세포 평가",
+                                                     "method":  "9종 암세포 MOI 10 처리 → 48시간 LDH 분석",
+                                                     "result":  "췌장암 등 9종 암세포 항암 활성"
+                                                 },
+                                                 {
+                                                     "title":  "동일 종 균주 비교",
+                                                     "method":  "CT26 세포 내 KCTC 14228BP·3189·3510 비교",
+                                                     "result":  "KCTC 14228BP의 현저한 생존율 감소"
+                                                 }
+                                             ],
+                             "charts":  [
+                                            {
+                                                "id":  "colon-tumor-targeting",
+                                                "type":  "bar",
+                                                "title":  "대장암 조직 내 균주 집적",
+                                                "unit":  "CFU/g tumor",
+                                                "labels":  [
+                                                               "KCTC 14228BP"
+                                                           ],
+                                                "values":  [
+                                                               506000000
+                                                           ],
+                                                "displayValues":  [
+                                                                      "5.06×10⁸"
+                                                                  ],
+                                                "sourceFigure":  "등록특허 10-2833393 도면 2",
+                                                "valueStatus":  "exact"
+                                            },
+                                            {
+                                                "id":  "breast-tumor-targeting",
+                                                "type":  "bar",
+                                                "title":  "유방암 조직 내 균주 집적",
+                                                "unit":  "CFU/g tumor",
+                                                "labels":  [
+                                                               "KCTC 14228BP"
+                                                           ],
+                                                "values":  [
+                                                               2640000000
+                                                           ],
+                                                "displayValues":  [
+                                                                      "2.64×10⁹"
+                                                                  ],
+                                                "sourceFigure":  "등록특허 10-2833393 도면 3",
+                                                "valueStatus":  "exact"
+                                            },
+                                            {
+                                                "id":  "same-species-antitumor",
+                                                "type":  "bar",
+                                                "title":  "동일 종 균주 대비 암세포 생존율",
+                                                "unit":  "세포 생존율 (%)",
+                                                "labels":  [
+                                                               "대조군",
+                                                               "14228BP",
+                                                               "3189",
+                                                               "3510"
+                                                           ],
+                                                "values":  [
+                                                               100,
+                                                               48,
+                                                               92,
+                                                               85
+                                                           ],
+                                                "sourceFigure":  "등록특허 10-2833393 도면 9",
+                                                "valueStatus":  "estimated-from-figure"
+                                            }
+                                        ],
+                             "products":  [
+                                              {
+                                                  "name":  "종양 표적 생균치료제",
+                                                  "application":  "종양 선택적 집적 + 자체 항암 활성",
+                                                  "customer":  "제약·바이오 기업"
+                                              },
+                                              {
+                                                  "name":  "약물전달 플랫폼",
+                                                  "application":  "항암제·치료 유전자 종양 표적 전달",
+                                                  "customer":  "신약개발 기업"
+                                              },
+                                              {
+                                                  "name":  "암 진단·영상화 소재",
+                                                  "application":  "영상표지 결합 + 종양 위치 추적",
+                                                  "customer":  "진단·의료영상 기업"
+                                              },
+                                              {
+                                                  "name":  "항암 마이크로바이옴 복합제",
+                                                  "application":  "항암제·면역항암제 병용 보조제",
+                                                  "customer":  "항암제 개발사"
+                                              },
+                                              {
+                                                  "name":  "균주 스크리닝 연구소재",
+                                                  "application":  "종양 표적 기전·전달체 개발 연구",
+                                                  "customer":  "대학·연구기관"
+                                              }
+                                          ],
+                             "coreElements":  [
+                                                  {
+                                                      "title":  "종양 선택적 집적",
+                                                      "description":  "정상 조직 대비 종양 미세환경 선택적 집적"
+                                                  },
+                                                  {
+                                                      "title":  "균주 고유 항암 활성",
+                                                      "description":  "다양한 암종·동물모델의 종양 성장 억제"
+                                                  },
+                                                  {
+                                                      "title":  "진단·전달 플랫폼 확장",
+                                                      "description":  "약물·유전자·영상표지 탑재형 전달체"
+                                                  }
+                                              ],
+                             "utilizationSteps":  [
+                                                      {
+                                                          "step":  "01",
+                                                          "title":  "상담 신청",
+                                                          "description":  "적용 암종·개발단계·요구사항 협의"
+                                                      },
+                                                      {
+                                                          "step":  "02",
+                                                          "title":  "물질이전·기술실시계약",
+                                                          "description":  "평가범위·권리·사용조건 확정"
+                                                      },
+                                                      {
+                                                          "step":  "03",
+                                                          "title":  "균주 스탁 제공",
+                                                          "description":  "균주·기본 취급정보 제공"
+                                                      },
+                                                      {
+                                                          "step":  "04",
+                                                          "title":  "사업화",
+                                                          "description":  "효능검증·제형화·비임상·임상·제품화"
+                                                      }
+                                                  ],
+                             "portfolio":  [
+                                               {
+                                                   "type":  "특허",
+                                                   "name":  "암 진단, 예방 또는 치료용 락티카제이바실러스 조성물",
+                                                   "number":  "10-2833393",
+                                                   "status":  "등록"
+                                               },
+                                               {
+                                                   "type":  "균주",
+                                                   "name":  "Lacticaseibacillus paracasei KGMB04157",
+                                                   "number":  "KCTC 14228BP",
+                                                   "status":  "국제기탁"
+                                               }
+                                           ],
+                             "sources":  [
+                                             {
+                                                 "label":  "등록특허 10-2833393",
+                                                 "file":  "박승환_1020220067778B1.pdf",
+                                                 "locator":  "문단 0118, 0130~0176 및 도면 2·3·9",
+                                                 "public":  true
+                                             }
+                                         ]
+                         }
+                     ]
+}
