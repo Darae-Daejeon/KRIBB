@@ -96,6 +96,11 @@ select {
   letter-spacing: 0.16em;
 }
 
+.site-kicker {
+  font-size: 1.92rem;
+  letter-spacing: 0.06em;
+}
+
 .status-message {
   width: min(calc(100% - 48px), var(--content-max));
   margin: 16px auto;
