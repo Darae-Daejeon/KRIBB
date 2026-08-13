@@ -19,7 +19,6 @@ function renderCard(technology, index) {
   top.className = "technology-card__top";
   top.append(
     text("span", String(index + 1).padStart(2, "0"), "technology-card__number"),
-    text("span", technology.classification.extension, "technology-card__type"),
   );
 
   const body = document.createElement("div");
