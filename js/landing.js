@@ -10,51 +10,61 @@ function text(tag, value, className) {
   return element;
 }
 
-function renderCard(technology, index) {
-  const article = document.createElement("article");
-  article.className = "technology-card";
-  article.dataset.technologyId = technology.id;
+function technologyHref(technology) {
+  const page = technology.template === "classic" ? "classic-smk.html" : "smk.html";
+  return `./${page}?tech=${encodeURIComponent(technology.id)}`;
+}
 
-  const top = document.createElement("div");
-  top.className = "technology-card__top";
-  top.append(
-    text("span", String(index + 1).padStart(2, "0"), "technology-card__number"),
-  );
+function renderTable(technologies) {
+  const wrapper = document.createElement("div");
+  wrapper.className = "technology-table-scroll";
+  wrapper.tabIndex = 0;
+  wrapper.setAttribute("aria-label", "기술 목록 가로 스크롤 영역");
 
-  const body = document.createElement("div");
-  body.className = "technology-card__body";
-  body.append(
-    text("p", technology.summary, "technology-card__summary"),
-    text("h2", technology.title, "technology-card__title"),
-  );
+  const table = document.createElement("table");
+  table.className = "technology-table";
+  table.setAttribute("aria-label", "KRIBB 균주 기술 목록");
 
-  const meta = document.createElement("dl");
-  meta.className = "technology-card__meta";
-  for (const [label, value] of [
-    ["연구자", technology.researcher],
-    ["수탁번호", technology.strain.depositNumber],
-  ]) {
-    meta.append(text("dt", label), text("dd", value));
-  }
+  const head = document.createElement("thead");
+  const headRow = document.createElement("tr");
+  ["특허명", "출원번호", "기탁번호", "균주명", "보러가기"].forEach((label) => {
+    headRow.append(text("th", label));
+  });
+  head.append(headRow);
 
-  const link = document.createElement("a");
-  link.className = "technology-card__link";
-  link.href = `./smk.html?tech=${encodeURIComponent(technology.id)}`;
-  link.append(text("span", "기술 보러가기"), text("span", "↗", "technology-card__arrow"));
-  link.setAttribute("aria-label", `${technology.title} 기술 보러가기`);
+  const body = document.createElement("tbody");
+  technologies.forEach((technology) => {
+    const row = document.createElement("tr");
+    row.dataset.technologyId = technology.id;
+    row.append(
+      text("td", technology.patent.title, "technology-table__patent"),
+      text("td", technology.patent.applicationNumber || technology.patent.number || "-", "technology-table__number"),
+      text("td", technology.strain.depositNumber || "-", "technology-table__number"),
+      text("td", technology.strain.microorganismName || "-", "technology-table__strain"),
+    );
 
-  body.append(meta, link);
-  article.append(top, body);
-  return article;
+    const action = document.createElement("td");
+    action.className = "technology-table__action";
+    const link = document.createElement("a");
+    link.className = "technology-table__link";
+    link.href = technologyHref(technology);
+    link.textContent = "보러 가기";
+    link.setAttribute("aria-label", `${technology.title} 소개서 보러 가기`);
+    action.append(link);
+    row.append(action);
+    body.append(row);
+  });
+
+  table.append(head, body);
+  wrapper.append(table);
+  return wrapper;
 }
 
 async function init() {
   try {
     const catalog = await loadCatalog();
     const technologies = getPublicTechnologies(catalog);
-    const fragment = document.createDocumentFragment();
-    technologies.forEach((technology, index) => fragment.append(renderCard(technology, index)));
-    list.replaceChildren(fragment);
+    list.replaceChildren(renderTable(technologies));
     status.textContent = technologies.length ? "" : "현재 공개된 기술이 없습니다.";
   } catch (error) {
     status.classList.add("is-error");
