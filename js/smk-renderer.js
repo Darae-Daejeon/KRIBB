@@ -98,7 +98,7 @@ function renderHero(technology) {
   const logo = document.createElement("img");
   logo.src = "./assets/kribb-ci/kribb-signature-ko-en.png";
   logo.alt = "한국생명공학연구원";
-  brand.append(logo, node("span", "smk-hero__document-type", "STRAIN TECHNOLOGY MARKETING KIT"));
+  brand.append(logo, node("span", "smk-hero__document-type", "전북연구개발특구"));
 
   const title = node("h1", "smk-hero__title");
   technology.titleLines.forEach((line, index) => {
