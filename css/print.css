@@ -198,6 +198,10 @@
   table-layout: fixed;
 }
 
+.print-section .info-table {
+  border-top: 0.2mm solid #dbe6ee;
+}
+
 .print-section .info-table th,
 .print-section .info-table td,
 .print-section .data-table th,

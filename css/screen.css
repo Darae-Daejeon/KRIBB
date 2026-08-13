@@ -169,6 +169,10 @@
   table-layout: fixed;
 }
 
+.info-table {
+  border-top: 1px solid var(--kribb-line);
+}
+
 .info-table th,
 .info-table td,
 .data-table th,
