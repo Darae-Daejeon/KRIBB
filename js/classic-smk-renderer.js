@@ -42,6 +42,7 @@ function list(values, className = "classic-bullets") {
 
 function section(number, modifier) {
   const node = element("section", `classic-section classic-section--${modifier}`);
+  node.id = `section-${number}`;
   node.dataset.sectionNumber = number;
   const header = element("header", "classic-section__heading");
   header.append(
@@ -66,8 +67,9 @@ function table(headers, rows, label, variant = "") {
   const body = document.createElement("tbody");
   rows.forEach((values) => {
     const row = document.createElement("tr");
-    values.forEach((value) => {
+    values.forEach((value, index) => {
       const cell = document.createElement("td");
+      if (headers?.[index]) cell.dataset.label = headers[index];
       if (Array.isArray(value)) cell.append(list(value, "classic-cell-list"));
       else appendProtectedText(cell, value || "-");
       row.append(cell);
@@ -83,7 +85,7 @@ function definitionTable(entries, label) {
   return table(null, entries, label, "definition");
 }
 
-function renderHeader(technology) {
+function renderHeader(technology, pageNumber) {
   const header = element("header", "classic-header");
   const top = element("div", "classic-header__top");
   const logo = document.createElement("img");
@@ -92,7 +94,7 @@ function renderHeader(technology) {
   logo.alt = "한국생명공학연구원";
   top.append(
     logo,
-    element("p", "classic-document-id", "전북연구개발특구 · 「전북 INNOTECH ROUNDMEET」 - 첨단바이오편"),
+    element("p", "classic-document-id", `전북연구개발특구 · 「전북 INNOTECH ROUNDMEET」 - 첨단바이오편 · ${String(pageNumber).padStart(2, "0")}/02`),
   );
 
   const tags = element("div", "classic-tags");
@@ -103,7 +105,7 @@ function renderHeader(technology) {
   const hero = element("div", "classic-hero");
   const copy = element("div", "classic-hero__copy");
   copy.append(
-    element("h1", "classic-hero__title", technology.title),
+    element(pageNumber === 1 ? "h1" : "p", "classic-hero__title", technology.title),
     element("p", "classic-hero__subtitle", technology.subtitle),
   );
   hero.append(copy, element("p", "classic-researcher", technology.researcherDisplay));
@@ -236,17 +238,48 @@ function renderPortfolio(technology) {
   return node;
 }
 
-function fitSheet() {
-  const sheet = root.querySelector(".classic-sheet");
-  if (!sheet || window.matchMedia("(max-width: 900px)").matches) {
+function renderFooter(pageNumber) {
+  const footer = element("footer", "classic-footer");
+  footer.append(
+    element("span", "", "다래전략사업화센터"),
+    element("span", "classic-footer__page", `${String(pageNumber).padStart(2, "0")} / 02`),
+    element("span", "", "Korea Research Institute of Bioscience and Biotechnology"),
+  );
+  return footer;
+}
+
+function renderSheet(technology, pageNumber, sections) {
+  const frame = element("div", `classic-sheet-frame classic-sheet-frame--${pageNumber}`);
+  const sheet = element("article", `classic-sheet classic-sheet--page-${pageNumber}`);
+  sheet.setAttribute("aria-label", `${technology.title} ${pageNumber}페이지`);
+  const content = element("div", `classic-grid classic-grid--page-${pageNumber}`);
+  content.append(...sections);
+  sheet.append(renderHeader(technology, pageNumber), content, renderFooter(pageNumber));
+  frame.append(sheet);
+  return frame;
+}
+
+function fitSheets() {
+  const sheets = [...root.querySelectorAll(".classic-sheet")];
+  const frames = [...root.querySelectorAll(".classic-sheet-frame")];
+  if (!sheets.length || window.matchMedia("(max-width: 900px)").matches) {
     root.style.removeProperty("width");
     root.style.removeProperty("height");
+    frames.forEach((frame) => {
+      frame.style.removeProperty("width");
+      frame.style.removeProperty("height");
+    });
+    sheets.forEach((sheet) => sheet.style.removeProperty("--classic-scale"));
     return;
   }
-  const scale = Math.min((window.innerWidth - 32) / 1600, (window.innerHeight - 32) / 900, 1);
+  const scale = Math.min((window.innerWidth - 48) / 1600, 1);
   root.style.width = `${1600 * scale}px`;
-  root.style.height = `${900 * scale}px`;
-  sheet.style.setProperty("--classic-scale", String(scale));
+  root.style.height = "auto";
+  frames.forEach((frame) => {
+    frame.style.width = `${1600 * scale}px`;
+    frame.style.height = `${900 * scale}px`;
+  });
+  sheets.forEach((sheet) => sheet.style.setProperty("--classic-scale", String(scale)));
 }
 
 async function waitForImages(node) {
@@ -261,29 +294,25 @@ async function waitForImages(node) {
 }
 
 async function renderTechnology(technology) {
-  const sheet = element("article", "classic-sheet");
-  const content = element("main", "classic-grid");
-  content.append(
+  const pageOne = renderSheet(technology, 1, [
     renderStrain(technology),
     renderPatent(technology),
     renderExperiments(technology),
     renderRelatedData(technology),
+  ]);
+  const pageTwo = renderSheet(technology, 2, [
     renderAdvantages(technology),
     renderProducts(technology),
     renderProcess(technology),
     renderPortfolio(technology),
-  );
-  const footer = element("footer", "classic-footer");
-  footer.append(
-    element("span", "", "다래전략사업화센터"),
-    element("span", "", "Korea Research Institute of Bioscience and Biotechnology"),
-  );
-  sheet.append(renderHeader(technology), content, footer);
-  root.replaceChildren(sheet);
+  ]);
+  root.replaceChildren(pageOne, pageTwo);
   await document.fonts.ready;
-  await waitForImages(sheet);
-  fitSheet();
-  sheet.dataset.ready = "true";
+  await waitForImages(root);
+  fitSheets();
+  root.querySelectorAll(".classic-sheet").forEach((sheet) => {
+    sheet.dataset.ready = "true";
+  });
 }
 
 async function init() {
@@ -296,7 +325,7 @@ async function init() {
     await renderTechnology(technology);
     document.title = `${technology.title} | KRIBB`;
     status.textContent = "";
-    window.addEventListener("resize", fitSheet, { passive: true });
+    window.addEventListener("resize", fitSheets, { passive: true });
   } catch (error) {
     status.classList.add("is-error");
     status.textContent = error instanceof Error ? error.message : "기술소개서를 표시하지 못했습니다.";

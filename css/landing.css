@@ -158,7 +158,16 @@
   color: var(--kribb-muted);
   font-weight: 700;
   text-align: center !important;
+}
+
+.technology-table__number {
   white-space: nowrap;
+}
+
+.technology-table__strain {
+  white-space: normal;
+  word-break: keep-all;
+  overflow-wrap: normal;
 }
 
 .technology-table__action {
@@ -167,6 +176,7 @@
 }
 
 .technology-table__link {
+  min-width: 86px;
   min-height: 42px;
   display: inline-flex;
   align-items: center;
