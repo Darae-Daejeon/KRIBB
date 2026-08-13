@@ -1,4 +1,4 @@
-import { getPublicTechnologies, loadCatalog } from "./catalog.js";
+import { getPublicCatalogEntries, loadCatalog } from "./catalog.js";
 
 const list = document.querySelector("#technology-list");
 const status = document.querySelector("#status-message");
@@ -11,8 +11,14 @@ function text(tag, value, className) {
 }
 
 function technologyHref(technology) {
-  const page = technology.template === "classic" ? "classic-smk.html" : "smk.html";
-  return `./${page}?tech=${encodeURIComponent(technology.id)}`;
+  const pages = {
+    classic: "classic-smk.html",
+    portrait: "smk.html",
+    reference: "template-smk.html",
+  };
+  const page = pages[technology.template] || "smk.html";
+  const technologyId = technology.sourceTechnologyId || technology.id;
+  return `./${page}?tech=${encodeURIComponent(technologyId)}`;
 }
 
 function renderTable(technologies) {
@@ -63,7 +69,7 @@ function renderTable(technologies) {
 async function init() {
   try {
     const catalog = await loadCatalog();
-    const technologies = getPublicTechnologies(catalog);
+    const technologies = getPublicCatalogEntries(catalog);
     list.replaceChildren(renderTable(technologies));
     status.textContent = technologies.length ? "" : "현재 공개된 기술이 없습니다.";
   } catch (error) {

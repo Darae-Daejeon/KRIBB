@@ -1,5 +1,25 @@
 ﻿{
     "schemaVersion":  1,
+    "catalogEntries":  [
+                             {
+                                 "id":  "park-1020220067778",
+                                 "technologyId":  "park-1020220067778",
+                                 "template":  "portrait",
+                                 "visibility":  "public"
+                             },
+                             {
+                                 "id":  "lee-p2025-033",
+                                 "technologyId":  "lee-p2025-033",
+                                 "template":  "classic",
+                                 "visibility":  "public"
+                             },
+                             {
+                                 "id":  "lee-p2025-033-template",
+                                 "technologyId":  "lee-p2025-033",
+                                 "template":  "reference",
+                                 "visibility":  "public"
+                             }
+                         ],
     "technologies":  [
                          {
                              "id":  "park-1020220067778",

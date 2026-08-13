@@ -14,6 +14,19 @@ export function getPublicTechnologies(catalog) {
   return catalog.technologies.filter((item) => item.visibility === "public");
 }
 
+export function getPublicCatalogEntries(catalog) {
+  const technologies = new Map(catalog.technologies.map((item) => [item.id, item]));
+  if (!Array.isArray(catalog.catalogEntries)) return getPublicTechnologies(catalog);
+  return catalog.catalogEntries
+    .filter((entry) => entry.visibility === "public")
+    .map((entry) => {
+      const technology = technologies.get(entry.technologyId);
+      if (!technology) return null;
+      return { ...technology, id: entry.id, sourceTechnologyId: technology.id, template: entry.template };
+    })
+    .filter(Boolean);
+}
+
 export function getTechnology(catalog, id) {
   return catalog.technologies.find((item) => item.id === id) ?? null;
 }
