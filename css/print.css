@@ -72,7 +72,7 @@
 
 .print-page__body > .print-cover {
   flex: 0 0 auto;
-  margin: 0 0 1.5mm !important;
+  margin: 0 0 3mm !important;
 }
 
 .print-page__body > .print-section:not(:last-child) {
@@ -103,9 +103,9 @@
 
 .print-cover {
   min-height: 0 !important;
-  height: 35mm;
+  height: 30mm;
   margin: 0 0 4mm !important;
-  padding: 5mm 6mm !important;
+  padding: 3mm 6mm !important;
   display: block !important;
   position: relative !important;
   border: 0 !important;
@@ -128,13 +128,13 @@
 }
 
 .print-cover .eyebrow {
-  margin: 0 0 2mm;
+  margin: 0 0 1mm;
   font-size: 7pt;
 }
 
 .print-cover .smk-hero__title {
   max-width: 168mm;
-  margin: 0 0 3mm;
+  margin: 0 0 1.2mm;
   font-size: 20pt;
   line-height: 1.16;
   letter-spacing: -0.04em;
@@ -283,6 +283,10 @@
   margin: 0;
   padding: 2mm 1.5mm 1mm;
   border-radius: 1.8mm;
+}
+
+.print-section[data-section-id="section-04"] .evidence-chart {
+  padding: 1.4mm 1.5mm 0.6mm;
 }
 
 .print-section .evidence-chart svg {
