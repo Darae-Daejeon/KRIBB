@@ -63,12 +63,11 @@
       height: auto;
     }
 
-    .region-label {
+    .region-logo {
+      display: block;
       flex: 0 0 auto;
-      color: var(--kribb-navy);
-      font-size: clamp(22px, 2vw, 30px);
-      font-weight: 900;
-      letter-spacing: -0.04em;
+      width: clamp(220px, 22vw, 300px);
+      height: auto;
     }
 
     .hero {
@@ -270,8 +269,8 @@
         width: min(58vw, 300px);
       }
 
-      .region-label {
-        font-size: 18px;
+      .region-logo {
+        width: min(32vw, 220px);
       }
 
       .hero {
@@ -306,6 +305,10 @@
         width: min(88vw, 300px);
       }
 
+      .region-logo {
+        width: min(68vw, 260px);
+      }
+
       .hero h1 {
         font-size: 32px;
       }
@@ -319,7 +322,7 @@
       <a class="brand" href="./" aria-label="KRIBB 균주소개서 홈">
         <img src="assets/kribb-ci/kribb-signature-ko-en.png" alt="한국생명공학연구원">
       </a>
-      <span class="region-label">전북연구개발특구</span>
+      <img class="region-logo" src="assets/innopolis/innopolis-logo.png" alt="INNOPOLIS 전북연구개발특구">
     </div>
   </header>
 
