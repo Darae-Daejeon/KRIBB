@@ -3,32 +3,378 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="한국생명공학연구원 균주 기술 소개 자료">
-  <title>KRIBB 균주 기술 카탈로그</title>
-  <link rel="stylesheet" href="./css/common.css">
-  <link rel="stylesheet" href="./css/landing.css?v=20260813-2">
+  <meta name="description" content="한국생명공학연구원 보유 균주 및 생물자원 기술소개서 목록">
+  <title>KRIBB 균주 기술소개서</title>
+  <style>
+    :root {
+      --kribb-navy: #162a8a;
+      --kribb-blue: #35a9df;
+      --kribb-pale: #eef7fb;
+      --ink: #142033;
+      --muted: #647084;
+      --line: #d8e2eb;
+      --paper: #ffffff;
+      --background: #f4f7fa;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      word-break: keep-all;
+      overflow-wrap: normal;
+    }
+
+    body {
+      margin: 0;
+      min-width: 320px;
+      background: var(--background);
+      color: var(--ink);
+      font-family: "Pretendard", "Noto Sans KR", "Malgun Gothic", sans-serif;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    .wrap {
+      width: min(calc(100% - 48px), 1280px);
+      margin: 0 auto;
+    }
+
+    .site-header {
+      border-bottom: 1px solid var(--line);
+      background: var(--paper);
+    }
+
+    .site-header__inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      min-height: 104px;
+      gap: 32px;
+    }
+
+    .brand img {
+      display: block;
+      width: min(100%, 390px);
+      height: auto;
+    }
+
+    .region-label {
+      flex: 0 0 auto;
+      color: var(--kribb-navy);
+      font-size: clamp(22px, 2vw, 30px);
+      font-weight: 900;
+      letter-spacing: -0.04em;
+    }
+
+    .hero {
+      padding: 72px 0 62px;
+      background:
+        linear-gradient(110deg, rgba(22, 42, 138, 0.045), rgba(53, 169, 223, 0.09)),
+        var(--paper);
+    }
+
+    .hero__eyebrow {
+      margin: 0 0 16px;
+      color: var(--kribb-navy);
+      font-size: 16px;
+      font-weight: 900;
+      letter-spacing: 0.08em;
+    }
+
+    .hero h1 {
+      margin: 0;
+      font-size: clamp(34px, 3.4vw, 52px);
+      line-height: 1.16;
+      letter-spacing: -0.055em;
+    }
+
+    .hero h1 span {
+      display: block;
+      white-space: nowrap;
+    }
+
+    .hero h1 .subject {
+      margin-top: 10px;
+      color: var(--muted);
+      font-size: 0.52em;
+      font-weight: 700;
+      letter-spacing: -0.035em;
+    }
+
+    main {
+      padding: 58px 0 88px;
+    }
+
+    .section-heading {
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      gap: 24px;
+      margin-bottom: 20px;
+    }
+
+    .section-heading h2 {
+      margin: 0;
+      font-size: 26px;
+      letter-spacing: -0.04em;
+    }
+
+    .count {
+      color: var(--muted);
+      font-size: 14px;
+      font-weight: 800;
+    }
+
+    .table-shell {
+      overflow-x: auto;
+      border: 1px solid var(--line);
+      background: var(--paper);
+      box-shadow: 0 18px 40px rgba(28, 51, 78, 0.08);
+    }
+
+    table {
+      width: 100%;
+      min-width: 1080px;
+      border-collapse: collapse;
+      table-layout: fixed;
+    }
+
+    col.patent-name { width: 39%; }
+    col.patent-number { width: 17%; }
+    col.deposit-number { width: 15%; }
+    col.strain-name { width: 19%; }
+    col.open { width: 10%; }
+
+    th,
+    td {
+      border-bottom: 1px solid var(--line);
+      padding: 21px 18px;
+      vertical-align: middle;
+    }
+
+    thead th {
+      border-top: 3px solid var(--kribb-navy);
+      background: var(--kribb-pale);
+      color: var(--kribb-navy);
+      font-size: 14px;
+      font-weight: 900;
+      text-align: center;
+    }
+
+    tbody tr:last-child td {
+      border-bottom: 0;
+    }
+
+    tbody tr:hover {
+      background: #f8fbfd;
+    }
+
+    td {
+      font-size: 15px;
+      line-height: 1.55;
+    }
+
+    .patent-title {
+      font-size: 16px;
+      font-weight: 800;
+      text-align: left;
+    }
+
+    .number,
+    .deposit,
+    .strain,
+    .action {
+      text-align: center;
+    }
+
+    .number,
+    .deposit {
+      color: var(--muted);
+      font-weight: 700;
+      white-space: nowrap;
+    }
+
+    .strain {
+      font-weight: 700;
+    }
+
+    .action a {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-width: 96px;
+      min-height: 42px;
+      padding: 10px 16px;
+      background: var(--kribb-navy);
+      color: #fff;
+      font-size: 14px;
+      font-weight: 900;
+      white-space: nowrap;
+      transition: background-color 160ms ease;
+    }
+
+    .action a:hover,
+    .action a:focus-visible {
+      background: #0f1f6e;
+    }
+
+    .action a:focus-visible {
+      outline: 3px solid rgba(53, 169, 223, 0.45);
+      outline-offset: 3px;
+    }
+
+    footer {
+      border-top: 1px solid var(--line);
+      background: var(--paper);
+    }
+
+    .footer-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      min-height: 86px;
+      gap: 24px;
+      color: var(--muted);
+      font-size: 13px;
+      font-weight: 700;
+    }
+
+    .footer-inner strong {
+      color: var(--kribb-navy);
+      font-size: 15px;
+    }
+
+    @media (max-width: 760px) {
+      .wrap {
+        width: min(calc(100% - 24px), 1280px);
+      }
+
+      .site-header__inner {
+        min-height: 86px;
+        gap: 18px;
+      }
+
+      .brand img {
+        width: min(58vw, 300px);
+      }
+
+      .region-label {
+        font-size: 18px;
+      }
+
+      .hero {
+        padding: 48px 0 42px;
+      }
+
+      main {
+        padding: 40px 0 64px;
+      }
+
+      .hero h1 span {
+        white-space: normal;
+      }
+
+      .footer-inner {
+        align-items: flex-start;
+        flex-direction: column;
+        justify-content: center;
+        padding: 20px 0;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .site-header__inner {
+        align-items: flex-start;
+        flex-direction: column;
+        justify-content: center;
+        padding: 18px 0;
+      }
+
+      .brand img {
+        width: min(88vw, 300px);
+      }
+
+      .hero h1 {
+        font-size: 32px;
+      }
+
+    }
+  </style>
 </head>
-<body class="landing-page">
+<body>
   <header class="site-header">
-    <a class="brand" href="./index.html" aria-label="KRIBB 기술 카탈로그 홈">
-      <img src="./assets/kribb-ci/kribb-signature-ko-en.png" alt="한국생명공학연구원">
-    </a>
-    <span class="site-kicker">전북연구개발특구</span>
+    <div class="wrap site-header__inner">
+      <a class="brand" href="./" aria-label="KRIBB 균주 기술소개서 홈">
+        <img src="assets/kribb-ci/kribb-signature-ko-en.png" alt="한국생명공학연구원">
+      </a>
+      <span class="region-label">전북연구개발특구</span>
+    </div>
   </header>
-  <main>
-    <section class="landing-hero" aria-labelledby="landing-title">
-      <h1 id="landing-title">
-        <span class="landing-title__event">「전북 INNOTECH ROUNDMEET」 - 첨단바이오편</span>
-        <span class="landing-title__subject">KRIBB 보유 생물자원 산업활용 촉진 기술설명회</span>
+
+  <section class="hero" aria-labelledby="page-title">
+    <div class="wrap">
+      <p class="hero__eyebrow">BIORESOURCE TECHNOLOGY CATALOG</p>
+      <h1 id="page-title">
+        <span>「전북 INNOTECH ROUNDMEET」 - 첨단바이오편</span>
+        <span class="subject">KRIBB 보유 생물자원 산업활용 촉진 기술설명회</span>
       </h1>
-    </section>
-    <p id="status-message" class="status-message" role="status" aria-live="polite">기술 정보를 불러오는 중입니다.</p>
-    <section id="technology-list" class="technology-list" aria-label="기술 목록"></section>
+    </div>
+  </section>
+
+  <main class="wrap">
+    <div class="section-heading">
+      <h2>균주 기술소개서</h2>
+      <span class="count">총 2건</span>
+    </div>
+
+    <div class="table-shell">
+      <table aria-label="KRIBB 균주 기술소개서 목록">
+        <colgroup>
+          <col class="patent-name">
+          <col class="patent-number">
+          <col class="deposit-number">
+          <col class="strain-name">
+          <col class="open">
+        </colgroup>
+        <thead>
+          <tr>
+            <th scope="col">특허명</th>
+            <th scope="col">출원·등록번호</th>
+            <th scope="col">기탁번호</th>
+            <th scope="col">균주명</th>
+            <th scope="col">자료</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="patent-title">염 스트레스 내성을 갖는 신규한 슈도모나스 속 균주 및 이의 용도</td>
+            <td class="number">미공개</td>
+            <td class="deposit">KCTC 16244BP</td>
+            <td class="strain"><i>Pseudomonas</i> sp. JBR1</td>
+            <td class="action"><a href="smk1.html">보러 가기</a></td>
+          </tr>
+          <tr>
+            <td class="patent-title">락토바실러스 플란타륨 유래 다당체를 포함하는 항인플루엔자 바이러스용 조성물 및 제조방법</td>
+            <td class="number">등록 10-2007421</td>
+            <td class="deposit">—</td>
+            <td class="strain"><i>Lactobacillus plantarum</i> CK401</td>
+            <td class="action"><a href="smk2.html">보러 가기</a></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
   </main>
-  <footer class="site-footer">
-    <span>Korea Research Institute of Bioscience and Biotechnology</span>
-    <span>다래전략사업화센터</span>
+
+  <footer>
+    <div class="wrap footer-inner">
+      <span>Korea Research Institute of Bioscience and Biotechnology</span>
+      <strong>다래전략사업화센터</strong>
+    </div>
   </footer>
-  <script type="module" src="./js/landing.js?v=20260813-3"></script>
 </body>
 </html>

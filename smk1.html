@@ -1,0 +1,1156 @@
+<!doctype html>
+<html lang="ko">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>KRIBB 이지영</title>
+  <link rel="stylesheet" as="style" crossorigin
+    href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable.min.css">
+  <style>
+    :root {
+      --kribb-navy: #00205b;
+      --kribb-sky: #5bc2e7;
+      --near-black: #101114;
+      --cool-gray: #686b82;
+      --border-gray: #d8e0e5;
+      --soft-line: rgba(0, 32, 91, 0.22);
+      --white: #ffffff;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html,
+    body {
+      width: 100%;
+      min-height: 100%;
+      margin: 0;
+    }
+
+    body {
+      overflow: hidden;
+      background: #eef0f6;
+      color: var(--near-black);
+      font-family: "Pretendard Variable", Pretendard, -apple-system, BlinkMacSystemFont, system-ui, Roboto, "Helvetica Neue", "Segoe UI", "Apple SD Gothic Neo", "Noto Sans KR", "Malgun Gothic", sans-serif;
+    }
+
+    .slide-stage {
+      position: relative;
+      width: 100vw;
+      height: 100vh;
+      overflow: hidden;
+    }
+
+    @media screen {
+      .slide-stage[data-user-zoomed="true"] {
+        overflow: auto;
+      }
+
+      .slide-stage[data-user-zoomed="true"] .smk-slide {
+        top: 8px;
+        left: 8px;
+        transform: scale(var(--slide-scale, 1));
+        transform-origin: top left;
+      }
+    }
+
+    .smk-slide {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 1600px;
+      height: 900px;
+      overflow: hidden;
+      background: var(--white);
+      box-shadow: rgba(0, 0, 0, 0.08) 0 16px 50px;
+      transform: translate(-50%, -50%) scale(var(--slide-scale, 1));
+      transform-origin: center center;
+    }
+
+    .slide-header {
+      position: relative;
+      padding: 16px 24px 0;
+    }
+
+    .document-id {
+      position: absolute;
+      top: 10px;
+      right: 24px;
+      color: var(--near-black);
+      font-size: 14px;
+      font-weight: 500;
+      line-height: 1;
+      max-width: 720px;
+      white-space: nowrap;
+    }
+
+    .tag-list {
+      display: flex;
+      gap: 6px;
+      height: 28px;
+      align-items: flex-end;
+    }
+
+    .slide-tag {
+      display: inline-flex;
+      min-width: 124px;
+      height: 26px;
+      align-items: center;
+      justify-content: center;
+      padding: 0 18px;
+      border-radius: 12px 12px 0 0;
+      background: var(--kribb-navy);
+      color: var(--white);
+      font-size: 14px;
+      font-weight: 700;
+      letter-spacing: 0;
+    }
+
+    .slide-tag.secondary {
+      background: #164f75;
+    }
+
+    .slide-tag.tertiary {
+      background: #2f789a;
+    }
+
+    .slide-tag.quaternary {
+      background: var(--kribb-sky);
+      color: var(--kribb-navy);
+    }
+
+    .hero-box {
+      height: 130px;
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) 300px;
+      gap: 26px;
+      align-items: center;
+      padding: 18px 28px 18px 38px;
+      border-top: 5px solid var(--kribb-navy);
+      border-radius: 0 0 10px 10px;
+      background: linear-gradient(135deg, #eaf6fb 0%, #f6fbfd 62%, #ffffff 100%);
+      box-shadow: rgba(0, 0, 0, 0.03) 0 4px 24px;
+    }
+
+    .technology-title {
+      max-width: none;
+      margin: 0;
+      color: var(--near-black);
+      font-size: 25px;
+      font-weight: 800;
+      line-height: 1.24;
+      letter-spacing: 0;
+      word-break: keep-all;
+      white-space: nowrap;
+    }
+
+    .researcher-card {
+      min-width: 0;
+      padding-left: 22px;
+      border-left: 1px solid rgba(0, 32, 91, 0.22);
+      text-align: right;
+    }
+
+    .researcher-label {
+      margin-bottom: 6px;
+      color: var(--kribb-navy);
+      font-size: 22px;
+      font-weight: 800;
+    }
+
+    .researcher-name-line {
+      display: flex;
+      justify-content: flex-end;
+      align-items: baseline;
+      gap: 9px;
+      margin-bottom: 5px;
+    }
+
+    .researcher-name {
+      font-size: 21px;
+      font-weight: 800;
+    }
+
+    .researcher-position {
+      color: var(--cool-gray);
+      font-size: 15px;
+      font-weight: 600;
+    }
+
+    .researcher-affiliation {
+      margin: 3px 0;
+      color: var(--cool-gray);
+      font-size: 14px;
+      font-weight: 500;
+      line-height: 1.3;
+    }
+
+    .content-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      column-gap: 66px;
+      height: 716px;
+      padding: 6px 24px 12px;
+    }
+
+    .content-column {
+      display: grid;
+      gap: 9px;
+      height: 100%;
+      align-content: space-between;
+    }
+
+    .section-block {
+      min-width: 0;
+    }
+
+    .section-heading {
+      display: flex;
+      align-items: center;
+      gap: 7px;
+      min-height: 24px;
+      margin: 0 0 5px;
+      padding-bottom: 3px;
+      border-bottom: 2px solid var(--soft-line);
+      color: var(--near-black);
+      font-size: 18px;
+      font-weight: 800;
+      line-height: 1.1;
+      letter-spacing: 0;
+    }
+
+    .section-heading::before {
+      content: "";
+      width: 16px;
+      height: 16px;
+      flex: 0 0 16px;
+      border-radius: 50%;
+      background: var(--kribb-sky);
+      box-shadow: inset 0 0 0 5px rgba(255, 255, 255, 0.72);
+    }
+
+    .ip-table {
+      width: 100%;
+      border-collapse: collapse;
+      table-layout: fixed;
+    }
+
+    .bullet-list {
+      margin: 0;
+      padding-left: 18px;
+      color: #2e3039;
+      font-size: 13.2px;
+      font-weight: 500;
+      line-height: 1.47;
+      word-break: keep-all;
+    }
+
+    .bullet-list li {
+      margin: 0 0 6px;
+      padding-left: 2px;
+    }
+
+    .tech-content-section .bullet-list {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      column-gap: 24px;
+      row-gap: 8px;
+      align-items: start;
+      padding-left: 0;
+      list-style: none;
+    }
+
+    .tech-content-section .bullet-list li {
+      min-width: 0;
+      margin: 0;
+    }
+
+    .experiment-item-title {
+      display: block;
+      color: var(--near-black);
+      font-weight: 800;
+    }
+
+    .experiment-item-detail {
+      position: relative;
+      display: block;
+      margin-top: 3px;
+      margin-left: 10px;
+      padding-left: 12px;
+    }
+
+    .experiment-item-detail::before {
+      content: "•";
+      position: absolute;
+      top: 0;
+      left: 0;
+      color: var(--kribb-navy);
+      font-weight: 800;
+    }
+
+    .advantage-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 0 16px;
+    }
+
+    .advantage-column {
+      display: grid;
+      grid-template-columns: 28px minmax(0, 1fr);
+      column-gap: 10px;
+      align-items: stretch;
+    }
+
+    .advantage-category-label {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 6px 3px;
+      border: 1px solid var(--border-gray);
+      background: #f1f6f8;
+      color: var(--kribb-navy);
+      font-size: 11.5px;
+      font-weight: 800;
+      line-height: 1;
+      letter-spacing: 1px;
+      writing-mode: vertical-rl;
+      text-orientation: upright;
+    }
+
+    .advantage-column-content {
+      min-width: 0;
+      display: grid;
+      gap: 8px;
+      align-content: start;
+    }
+
+    .advantage-item {
+      min-width: 0;
+    }
+
+    .advantage-copy {
+      min-width: 0;
+    }
+
+    .advantage-title {
+      display: flex;
+      align-items: baseline;
+      gap: 5px;
+      margin: 0;
+      color: var(--near-black);
+      font-size: 12.4px;
+      font-weight: 900;
+      line-height: 1.25;
+      word-break: keep-all;
+    }
+
+    .advantage-description {
+      margin: 3px 0 0;
+      padding-left: 15px;
+      color: var(--cool-gray);
+      font-size: 11.3px;
+      font-weight: 500;
+      line-height: 1.28;
+      word-break: keep-all;
+    }
+
+    .advantage-description li {
+      margin: 0;
+    }
+
+    .process-flow {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 22px;
+      margin: 0;
+      padding: 0;
+      list-style: none;
+    }
+
+    .process-card {
+      position: relative;
+      min-width: 0;
+      min-height: 82px;
+      padding: 10px 12px;
+      border: 1px solid var(--border-gray);
+      border-radius: 4px;
+      background: #ffffff;
+      box-shadow: none;
+    }
+
+    .process-card:not(:last-child)::after {
+      content: "→";
+      position: absolute;
+      top: 50%;
+      left: calc(100% + 3px);
+      width: 16px;
+      color: var(--kribb-navy);
+      font-size: 22px;
+      font-weight: 900;
+      line-height: 1;
+      text-align: center;
+      transform: translateY(-50%);
+    }
+
+    .process-step-title {
+      display: block;
+      margin: 0 0 7px;
+      color: var(--kribb-navy);
+      font-size: 13px;
+      font-weight: 900;
+      line-height: 1.15;
+    }
+
+    .process-step-description {
+      margin: 0;
+      color: #3b3d4a;
+      font-size: 11.3px;
+      font-weight: 500;
+      line-height: 1.35;
+      word-break: keep-all;
+    }
+
+
+    .ip-table th {
+      height: 22px;
+      border: 1px solid var(--border-gray);
+      background: #e7f5fa;
+      color: var(--kribb-navy);
+      font-size: 11.5px;
+      font-weight: 800;
+      text-align: center;
+    }
+
+    .ip-table td {
+      min-height: 38px;
+      padding: 4px 6px;
+      border: 1px solid var(--border-gray);
+      color: #2f313a;
+      font-size: 11.5px;
+      font-weight: 500;
+      line-height: 1.2;
+      text-align: center;
+      vertical-align: middle;
+    }
+
+    .ip-table td:nth-child(2) {
+      text-align: left;
+      word-break: keep-all;
+      overflow-wrap: normal;
+      line-height: 1.18;
+    }
+
+    .template-data-table td {
+      height: 26px;
+      min-height: 0;
+      padding: 3px 7px;
+    }
+
+    .classification-section .section-heading {
+      margin-bottom: 2px;
+    }
+
+    #strain-info-table {
+      margin: 0;
+    }
+
+    #strain-info-table th {
+      height: 20px;
+      padding: 1px 5px;
+    }
+
+    #strain-info-table td {
+      height: 23px;
+      padding: 2px 5px;
+      line-height: 1.15;
+    }
+
+    .template-data-table td:first-child {
+      text-align: center;
+    }
+
+    #strain-info-table col:first-child {
+      width: 30%;
+    }
+
+    #strain-info-table col:last-child {
+      width: 70%;
+    }
+
+    #patent-info-table col:first-child {
+      width: 20%;
+    }
+
+    #patent-info-table col:last-child {
+      width: 80%;
+    }
+
+    #product-scenario-table col:nth-child(1) {
+      width: 10%;
+    }
+
+    #product-scenario-table col:nth-child(2) {
+      width: 30%;
+    }
+
+    #product-scenario-table col:nth-child(3) {
+      width: 60%;
+    }
+
+    #ip-table col:first-child {
+      width: 20%;
+    }
+
+    #ip-table col:last-child {
+      width: 80%;
+    }
+
+    #product-scenario-table td:nth-child(2),
+    #product-scenario-table td:nth-child(3) {
+      text-align: left;
+    }
+
+    .related-data-images {
+      display: grid;
+      grid-template-columns: minmax(0, 42fr) minmax(0, 58fr);
+      gap: 12px;
+      width: 100%;
+      height: 250px;
+    }
+
+    .related-data-item {
+      display: grid;
+      grid-template-rows: auto minmax(0, 1fr);
+      gap: 4px;
+      min-width: 0;
+      min-height: 0;
+    }
+
+    .related-data-caption {
+      margin: 0;
+      padding-left: 18px;
+      color: #2e3039;
+      font-size: 12.5px;
+      font-weight: 700;
+      line-height: 1.3;
+      word-break: keep-all;
+    }
+
+    .related-data-caption li {
+      margin: 0;
+      padding-left: 1px;
+    }
+
+    .related-data-image-frame {
+      position: relative;
+      align-self: center;
+      justify-self: center;
+      max-width: 100%;
+      max-height: 100%;
+      overflow: hidden;
+      border: 1px solid #a9bbc7;
+      background: var(--white);
+    }
+
+    #related-data-image-frame-1 {
+      height: 100%;
+      aspect-ratio: 315 / 273;
+    }
+
+    #related-data-image-frame-2 {
+      width: 100%;
+      aspect-ratio: 504 / 267;
+    }
+
+    .related-data-image {
+      display: block;
+      width: 100%;
+      height: 100%;
+      min-width: 0;
+      min-height: 0;
+      border: 0;
+      background: var(--white);
+      object-fit: contain;
+      object-position: center;
+      cursor: zoom-in;
+    }
+
+    .related-data-image:focus:not(:focus-visible) {
+      outline: none;
+    }
+
+    .related-data-image:focus-visible {
+      outline: none;
+    }
+
+    .related-data-image-frame:has(.related-data-image:focus-visible) {
+      outline: 3px solid var(--kribb-sky);
+      outline-offset: 2px;
+    }
+
+    .image-lightbox {
+      position: fixed;
+      inset: 0;
+      z-index: 9999;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 40px;
+      background: rgba(16, 17, 20, 0.86);
+      opacity: 0;
+      visibility: hidden;
+      transition: opacity 180ms ease, visibility 0s linear 180ms;
+    }
+
+    .image-lightbox.is-open {
+      opacity: 1;
+      visibility: visible;
+      transition-delay: 0s;
+    }
+
+    .image-lightbox-image {
+      display: block;
+      max-width: 92vw;
+      max-height: 90vh;
+      border: 0;
+      object-fit: contain;
+      background: var(--white);
+      box-shadow: none;
+      clip-path: inset(4px);
+    }
+
+    .image-lightbox-close {
+      position: fixed;
+      top: 18px;
+      right: 22px;
+      width: 44px;
+      height: 44px;
+      padding: 0;
+      border: 0;
+      border-radius: 50%;
+      color: var(--white);
+      background: rgba(255, 255, 255, 0.14);
+      font: 400 34px/1 Arial, sans-serif;
+      cursor: pointer;
+    }
+
+    .image-lightbox-close:hover,
+    .image-lightbox-close:focus-visible {
+      background: rgba(255, 255, 255, 0.24);
+      outline: 2px solid var(--white);
+      outline-offset: 2px;
+    }
+
+    @media (max-width: 640px) {
+      .image-lightbox {
+        padding: 16px;
+      }
+
+      .image-lightbox-image {
+        max-width: 96vw;
+        max-height: 88vh;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .image-lightbox {
+        transition: none;
+      }
+    }
+
+    .right-column {
+      gap: 2px;
+    }
+
+    .right-column .advantage-column-content {
+      gap: 5px;
+    }
+
+    .right-column #product-scenario-table td,
+    .right-column #ip-table td {
+      height: 22px;
+      padding-top: 2px;
+      padding-bottom: 2px;
+    }
+
+    .right-column .process-card {
+      min-height: 64px;
+      padding: 8px 10px;
+    }
+
+    @page {
+      size: A4 landscape;
+      margin: 0;
+    }
+
+    @media print {
+      .image-lightbox {
+        display: none !important;
+      }
+
+      html,
+      body {
+        width: 297mm;
+        height: 210mm;
+        margin: 0;
+        padding: 0;
+      }
+
+
+      body {
+        background: #ffffff;
+        overflow: hidden;
+        -webkit-print-color-adjust: exact;
+        print-color-adjust: exact;
+      }
+
+      .slide-stage {
+        position: relative;
+        width: 297mm;
+        height: 210mm;
+        display: block;
+        overflow: hidden;
+      }
+
+      .smk-slide {
+        position: absolute;
+        top: 6mm;
+        left: 6mm;
+        width: 1600px;
+        height: 900px;
+        box-shadow: none;
+        transform: scaleX(0.6732) scaleY(0.8315) !important;
+        transform-origin: top left;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <main class="slide-stage" aria-label="SMK 16:9 기술소개 장표">
+    <article class="smk-slide" id="smk-slide">
+      <header class="slide-header" id="slide-header">
+        <div class="document-id" id="document-id">KRIBB 보유 생물자원 산업활용 촉진 기술설명회 | 한국생명공학연구원</div>
+        <div class="tag-list" id="tag-list" aria-label="기술 태그">
+          <span class="slide-tag primary" id="tag-primary">농업·그린바이오</span>
+          <span class="slide-tag secondary" id="tag-secondary">식물 생장촉진 미생물</span>
+          <span class="slide-tag tertiary" id="tag-tertiary">염 스트레스 대응 PGPB 및 마이크로바이옴</span>
+          <span class="slide-tag quaternary" id="tag-quaternary">균주 원천기술</span>
+        </div>
+        <section class="hero-box" id="hero-box" aria-label="기술명 및 연구책임자 정보">
+          <h1 class="technology-title" id="technology-title">염 스트레스 내성 <i>Pseudomonas sp.</i> JBR1 균주기반 농업 미생물 플랫폼</br>
+            <i>Pseudomonas sp.</i> JBR1 (KCTC 16244BP)</h1>
+          <aside class="researcher-card" id="researcher-card">
+            <div class="researcher-label" id="researcher-label">연구책임자</div>
+            <div class="researcher-name-line" id="researcher-name-line">
+              <strong class="researcher-name" id="researcher-name">이지영</strong>
+              <span class="researcher-position" id="researcher-position">박사</span>
+            </div>
+            <p class="researcher-affiliation" id="researcher-affiliation">한국생명공학연구원 생물자원센터</p>
+          </aside>
+        </section>
+      </header>
+
+      <div class="content-grid" id="content-grid">
+        <div class="content-column left-column" id="left-column">
+          <section class="section-block classification-section" id="section-classification">
+            <h2 class="section-heading" id="section-classification-title">균주 정보</h2>
+            <table class="ip-table template-data-table" id="strain-info-table" aria-label="균주 정보 표">
+              <colgroup>
+                <col>
+                <col>
+              </colgroup>
+              <thead>
+                <tr>
+                  <th id="strain-info-header-label">구분</th>
+                  <th id="strain-info-header-content">내용</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td id="strain-info-row-1-label">수탁번호(기탁일자)</td>
+                  <td id="strain-info-row-1-content">KCTC 16244BP (2025.02.13)</td>
+                </tr>
+                <tr>
+                  <td id="strain-info-row-2-label">미생물명</td>
+                  <td id="strain-info-row-2-content"><i>Pseudomonas sp.</i> JBR1</td>
+                </tr>
+                <tr>
+                  <td id="strain-info-row-3-label">미생물종류</td>
+                  <td id="strain-info-row-3-content">세균</td>
+                </tr>
+                <tr>
+                  <td id="strain-info-row-4-label">분류 특성</td>
+                  <td id="strain-info-row-4-content"><i>Pseudomonas</i> 속에 속하는 신규 종 후보</td>
+                </tr>
+                <tr>
+                  <td id="strain-info-row-5-label">분리원</td>
+                  <td id="strain-info-row-5-content">강원도 고성군 해안가 염생식물 Carex pumila의 내생세균</td>
+                </tr>
+                <tr>
+                  <td id="strain-info-row-6-label">핵심활성</td>
+                  <td id="strain-info-row-6-content">염 스트레스 내성 / 식물 생장 촉진 / 산화 스트레스 억제</td>
+                </tr>
+                <tr>
+                  <td id="strain-info-row-7-label">적용 형태</td>
+                  <td id="strain-info-row-7-content">균주 및 배양액 / 여과액 / 세포파쇄액 / 농축액 / 건조물 / 추출물 등</td>
+                </tr>
+                <tr>
+                  <td id="strain-info-row-7-label">적용가능 제품</td>
+                  <td id="strain-info-row-7-content">① 염류장애 대응 미생물 생장촉진제, ② 미생물 기반 Biostimulant, ③ 시설원예용 관주·관비 미생물제</td>
+                </tr>
+              </tbody>
+            </table>
+          </section>
+
+          <section class="section-block overview-section" id="section-overview">
+            <h2 class="section-heading" id="section-overview-title">특허 정보</h2>
+            <table class="ip-table template-data-table" id="patent-info-table" aria-label="특허 정보 표">
+              <colgroup>
+                <col>
+                <col>
+              </colgroup>
+              <tbody>
+                <tr>
+                  <th scope="row" id="patent-info-row-1-label">특허명칭</th>
+                  <td id="patent-info-row-1-content">염 스트레스 내성을 갖는 신규한 슈도모나스 속 균주 및 이의 용도</td>
+                </tr>
+                <tr>
+                  <th scope="row" id="patent-info-row-2-label">등록번호</th>
+                  <td id="patent-info-row-2-content">출원 후 현재 미공개 특허</td>
+                </tr>
+                <tr>
+                  <th scope="row" id="patent-info-row-3-label">핵심 차별성</th>
+                  <td id="patent-info-row-3-content">• 염생식물 유래 신규 <i>Pseudomonas</i> 종 후보 균주<br>
+                    • 최대 10% NaCl 조건 하도 생육<br>
+                    • 식물 생장 촉진 + ROS 억제 + Na⁺/K⁺ 항상성 개선을 동시에 구현<br>
+                    • 뿌리 내·외부 군집화 및 근권 미생물 군집 재구성 확인<br>
+                    • 균주뿐 아니라 배양액, 액상·분말·과립 등 다양한 농업용 제형으로 확장 가능
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </section>
+
+          <section class="section-block tech-content-section" id="section-tech-content">
+            <h2 class="section-heading" id="section-tech-content-title">실험 정보</h2>
+            <ul class="bullet-list" id="tech-content-list">
+              <li id="tech-content-bullet-1"><span class="experiment-item-title">① 최대 10% NaCl에서 생육하는 내염성 균주</span><span
+                  class="experiment-item-detail">염생식물 Carex pumila 유래 JBR1은 최대 10% NaCl 조건에서도 생육하며, 액체배양에서는 2% NaCl에서 최적
+                  성장.</span><span class="experiment-item-detail">비교균주 <i>Pseudomonas korensis</i>가 5% NaCl에서 성장이 급감한 반면 JBR1은
+                  10%까지 생육해 고염류 환경 적응성이 우수.</span></li>
+              <li id="tech-content-bullet-2"><span class="experiment-item-title">② 염 환경에서도 유지되는 복합 식물 생장촉진
+                  기능</span><span class="experiment-item-detail">1,000 mM NaCl에서도 IAA 생성이 확인되며, EPS·카탈라아제·ACC
+                  탈아미노효소·시데로포어 등 다양한 PGP 기능을 염 조건에서도 유지.</span><span class="experiment-item-detail">호르몬 조절, 영양 이용, 스트레스
+                  완화 기능을 함께 갖는 복합형 PGPB 균주로 활용 가능.</span></li>
+              <li id="tech-content-bullet-3">
+                <span class="experiment-item-title">③ 식물의 생장·광합성 및 스트레스 내성 동시
+                  개선</span>
+                  <span class="experiment-item-detail">100 mM NaCl 조건 하 JBR1 처리 시 싹 생중량 2.7배, 뿌리 생중량 최대 5.1배,
+                  엽록소 1.3배 증가.</span>
+                  <span class="experiment-item-detail">ROS는 대조군의 0.7배로 감소하고 POD·SOD·프롤린 증가 및 K⁺/Na⁺
+                  비율 개선을 통해 염·산화 스트레스 완화 효과 확인.</span></li>
+              <li id="tech-content-bullet-4">
+                <span class="experiment-item-title">④ 실제 토양·양배추 시험에서 생육 개선 및 뿌리 정착
+                  확인</span>
+                  <span class="experiment-item-detail">200 mM NaCl 조건 하 JBR1 처리 시 싹 생중량 2.0→2.8 g, 뿌리 생중량
+                  46.0→104.8 mg, 엽록소 28→35.6 μg/cm³ 개선</span><span class="experiment-item-detail">근권 미생물 군집 변화가 확인되어,
+                  균주 직접효과와 근권 마이크로바이옴 조절 가능성을 동시에 제시.</span></li>
+            </ul>
+          </section>
+
+        </div>
+
+        <div class="content-column right-column" id="right-column">
+          <section class="section-block limit-improvement-section" id="section-limit-improvement">
+            <h2 class="section-heading" id="section-limit-improvement-title">관련 데이터</h2>
+            <div class="related-data-images" id="related-data-images" aria-label="관련 데이터 이미지 영역">
+              <div class="related-data-item" id="related-data-item-1">
+                <ul class="related-data-caption">
+                  <li id="related-data-caption-1">애기장대의 싹·뿌리 생중량 및 엽록소·로제트 개선</li>
+                </ul>
+                <div class="related-data-image-frame" id="related-data-image-frame-1">
+                  <img class="related-data-image" id="related-data-image-1"
+                    src="assets/smk1/img1.png" alt="애기장대 생육 개선 관련 데이터">
+                </div>
+              </div>
+              <div class="related-data-item" id="related-data-item-2">
+                <ul class="related-data-caption">
+                  <li id="related-data-caption-2">JBR1 vs. P. korensis의 10% NaCl 생육 및 식물 생장 비교</li>
+                </ul>
+                <div class="related-data-image-frame" id="related-data-image-frame-2">
+                  <img class="related-data-image" id="related-data-image-2"
+                    src="assets/smk1/img2.png" alt="JBR1과 비교균주의 내염성 관련 데이터">
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <section class="section-block market-trend-section" id="section-market-trend">
+            <h2 class="section-heading" id="section-market-trend-title">기술우위성 및 고도화 필요사항</h2>
+            <div class="advantage-grid" id="advantage-grid">
+              <div class="advantage-column" id="advantage-column-left" aria-label="기술 우위성">
+                <div class="advantage-category-label" aria-hidden="true">기술 우위성</div>
+                <div class="advantage-column-content">
+                  <article class="advantage-item" id="advantage-item-1">
+                    <div class="advantage-copy">
+                      <h3 class="advantage-title" id="advantage-title-1">① 극한 내염성 차별성</h3>
+                      <ul class="advantage-description">최대 10% NaCl에서도 생육<br>비교 <i>Pseudomonas</i> 균주보다 높은 염 내성 확인</ul>
+                    </div>
+                  </article>
+                  <article class="advantage-item" id="advantage-item-2">
+                    <div class="advantage-copy">
+                      <h3 class="advantage-title" id="advantage-title-2">② 복합 생장촉진 기능</h3>
+                      <ul class="advantage-description">IAA·EPS·시데로포어·ACC 탈아미노효소 등 복수의 PGP 기능 확보</ul>
+                    </div>
+                  </article>
+                  <article class="advantage-item" id="advantage-item-3">
+                    <div class="advantage-copy">
+                      <h3 class="advantage-title" id="advantage-title-3">③ 명확한 작물효능</h3>
+                      <ul class="advantage-description">싹·뿌리 중량, 엽록소, 로제트 크기 등 정량 개선</ul>
+                    </div>
+                  </article>
+                </div>
+              </div>
+              <div class="advantage-column" id="advantage-column-right" aria-label="고도화 필요사항">
+                <div class="advantage-category-label" aria-hidden="true">고도화 필요사항</div>
+                <div class="advantage-column-content">
+                  <article class="advantage-item" id="advantage-item-4">
+                    <div class="advantage-copy">
+                      <h3 class="advantage-title" id="advantage-title-4">① 실증 단계 확대 필요</h3>
+                      <ul class="advantage-description">현재 핵심 시험은 애기장대·양배추 중심<br>주요 경제작물·다양한 토양에서 추가 검증 필요</ul>
+                    </div>
+                  </article>
+                  <article class="advantage-item" id="advantage-item-5">
+                    <div class="advantage-copy">
+                      <h3 class="advantage-title" id="advantage-title-5">② 포장환경 재현성</h3>
+                      <ul class="advantage-description">온도·토양·관수·기존 미생물군 등에 따라 효능 편차 가능</ul>
+                    </div>
+                  </article>
+                  <article class="advantage-item" id="advantage-item-6">
+                    <div class="advantage-copy">
+                      <h3 class="advantage-title" id="advantage-title-6">③ 환경·생물안전성 평가</h3>
+                      <ul class="advantage-description">신규 종 후보 균주이므로 상용화 전 환경안전성·비표적 영향 등 추가 검증 필요</ul>
+                    </div>
+                  </article>
+                </div>
+              </div>
+            </div>
+          </section>
+          <section class="section-block maturity-section" id="section-maturity">
+            <h2 class="section-heading" id="section-maturity-title">기술활용 절차</h2>
+            <ol class="process-flow" id="process-flow" aria-label="기술활용 4단계 절차">
+              <li class="process-card" id="process-card-1"><strong class="process-step-title"
+                  id="process-step-title-1">01.상담 신청</strong>
+                <p class="process-step-description" id="process-step-description-1">기술내용 검토<br>적용제품·적응증 협의</p>
+              </li>
+              <li class="process-card" id="process-card-2"><strong class="process-step-title"
+                  id="process-step-title-2">02.기술실시계약</strong>
+                <p class="process-step-description" id="process-step-description-2">기술이전 조건 협의<br>권리범위·사업분야 협의</p>
+              </li>
+              <li class="process-card" id="process-card-3"><strong class="process-step-title"
+                  id="process-step-title-3">03.균주 스탁 제공</strong>
+                <p class="process-step-description" id="process-step-description-3">균주 Stock 제공<br>기업 내부 검증</p>
+              </li>
+              <li class="process-card" id="process-card-4"><strong class="process-step-title"
+                  id="process-step-title-4">04.사업화</strong>
+                <p class="process-step-description" id="process-step-description-4">제품·제형 개발<br>비임상·임상 및 인허가</p>
+              </li>
+            </ol>
+          </section>
+
+          <section class="section-block ip-portfolio-section" id="section-ip-portfolio">
+            <h2 class="section-heading" id="section-ip-portfolio-title">연구자 보유 균주 및 특허</h2>
+            <table class="ip-table template-data-table" id="ip-table" aria-label="연구자 보유 균주 및 특허 표">
+              <colgroup>
+                <col>
+                <col>
+              </colgroup>
+              <thead>
+                <tr>
+                  <th id="ip-table-header-label">구분</th>
+                  <th id="ip-table-header-content">보유 균주 및 특허</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td id="ip-row-1-label">KCTC 15056BP</td>
+                  <td id="ip-row-1-content">바실러스 테킬렌시스 (<i>Bacillus tequilensis</i>) /식물 생장을 촉진하는 바실러스 테킬렌시스 <i>PAMB00293</i> 균주 및 이의
+                    용도</td>
+                </tr>
+                <tr>
+                  <td id="ip-row-2-label">KCTC13521BP</td>
+                  <td id="ip-row-2-content">마이크로스트로마 파일로플라눔 (<i>Microstroma phylloplanum</i>) AmE-3 / 마이크로스트로마
+                    파일로플라눔(<i>Microstroma phylloplanum</i>)AmE-3 균주 및 이의 용도</td>
+                </tr>
+                <tr>
+                  <td id="ip-row-3-label">KCTC18623P</td>
+                  <td id="ip-row-3-content">판토에아 디스퍼사 RO-21 / 판토에아 디스퍼사 RO-21 (KCTC18623P)를 포함하는 식물 흑반병 방제용 조성물</td>
+                </tr>
+              </tbody>
+            </table>
+          </section>
+
+        </div>
+      </div>
+    </article>
+  </main>
+
+  <div class="image-lightbox" id="image-lightbox" role="dialog" aria-modal="true" aria-label="관련 데이터 이미지 확대 보기"
+    aria-hidden="true">
+    <button class="image-lightbox-close" id="image-lightbox-close" type="button" aria-label="확대 이미지 닫기">&times;</button>
+    <img class="image-lightbox-image" id="image-lightbox-image" alt="">
+  </div>
+
+  <script>
+    (function () {
+      const stage = document.querySelector(".slide-stage");
+      const slide = document.getElementById("smk-slide");
+      const designWidth = 1600;
+      const designHeight = 900;
+      const zoomStep = 0.25;
+      const maximumZoom = 2.5;
+      let fittedScale = 1;
+      let zoomMultiplier = 1;
+
+      function setupImageLightbox() {
+        const triggers = Array.from(document.querySelectorAll(".related-data-image"));
+        const lightbox = document.getElementById("image-lightbox");
+        const lightboxImage = document.getElementById("image-lightbox-image");
+        const closeButton = document.getElementById("image-lightbox-close");
+        const requestedScale = 2;
+        let activeTrigger = null;
+        let openedWithKeyboard = false;
+        let previousBodyOverflow = "";
+
+        if (!triggers.length || !lightbox || !lightboxImage || !closeButton) return;
+
+        const resizeLightboxImage = () => {
+          const naturalWidth = lightboxImage.naturalWidth;
+          const naturalHeight = lightboxImage.naturalHeight;
+          if (!naturalWidth || !naturalHeight) return;
+
+          const availableWidth = window.innerWidth * 0.92;
+          const availableHeight = window.innerHeight * 0.9;
+          const appliedScale = Math.min(
+            requestedScale,
+            availableWidth / naturalWidth,
+            availableHeight / naturalHeight
+          );
+
+          lightboxImage.style.width = `${Math.round(naturalWidth * appliedScale)}px`;
+          lightboxImage.style.height = `${Math.round(naturalHeight * appliedScale)}px`;
+        };
+
+        const openLightbox = (event) => {
+          const trigger = event.currentTarget;
+          activeTrigger = trigger;
+          openedWithKeyboard = event.type === "keydown";
+          lightboxImage.src = trigger.currentSrc || trigger.src;
+          lightboxImage.alt = trigger.alt;
+          if (lightboxImage.complete) resizeLightboxImage();
+          previousBodyOverflow = document.body.style.overflow;
+          document.body.style.overflow = "hidden";
+          lightbox.classList.add("is-open");
+          lightbox.setAttribute("aria-hidden", "false");
+          closeButton.focus();
+        };
+
+        const closeLightbox = () => {
+          if (!lightbox.classList.contains("is-open")) return;
+          lightbox.classList.remove("is-open");
+          lightbox.setAttribute("aria-hidden", "true");
+          document.body.style.overflow = previousBodyOverflow;
+          if (activeTrigger) {
+            activeTrigger.focus({ preventScroll: true });
+            if (!openedWithKeyboard) activeTrigger.blur();
+          }
+        };
+
+        lightboxImage.addEventListener("load", resizeLightboxImage);
+        window.addEventListener("resize", () => {
+          if (lightbox.classList.contains("is-open")) resizeLightboxImage();
+        });
+
+        triggers.forEach((trigger) => {
+          trigger.tabIndex = 0;
+          trigger.setAttribute("role", "button");
+          trigger.setAttribute("aria-haspopup", "dialog");
+          trigger.setAttribute("aria-label", `${trigger.alt} 확대 보기`);
+          trigger.addEventListener("click", openLightbox);
+          trigger.addEventListener("keydown", (event) => {
+            if (event.key === "Enter" || event.key === " ") {
+              event.preventDefault();
+              openLightbox(event);
+            }
+          });
+        });
+
+        closeButton.addEventListener("click", closeLightbox);
+        lightbox.addEventListener("click", (event) => {
+          if (event.target === lightbox) closeLightbox();
+        });
+        document.addEventListener("keydown", (event) => {
+          if (event.key === "Escape") closeLightbox();
+        });
+      }
+
+      function fitSlide() {
+        const padding = 16;
+        fittedScale = Math.min(
+          (window.innerWidth - padding) / designWidth,
+          (window.innerHeight - padding) / designHeight,
+          1
+        );
+        const appliedScale = Math.max(fittedScale * zoomMultiplier, 0.1);
+        slide.style.setProperty("--slide-scale", appliedScale.toString());
+
+        if (zoomMultiplier > 1) {
+          stage.dataset.userZoomed = "true";
+        } else {
+          stage.removeAttribute("data-user-zoomed");
+          stage.scrollLeft = 0;
+          stage.scrollTop = 0;
+        }
+      }
+
+      stage.addEventListener("wheel", (event) => {
+        if (!event.ctrlKey) return;
+        event.preventDefault();
+
+        const direction = event.deltaY < 0 ? 1 : -1;
+        const previousMultiplier = zoomMultiplier;
+        const nextMultiplier = Math.min(
+          maximumZoom,
+          Math.max(1, previousMultiplier + direction * zoomStep)
+        );
+        if (nextMultiplier === previousMultiplier) return;
+
+        const stageRect = stage.getBoundingClientRect();
+        const pointerX = event.clientX - stageRect.left;
+        const pointerY = event.clientY - stageRect.top;
+        const contentX = stage.scrollLeft + pointerX;
+        const contentY = stage.scrollTop + pointerY;
+
+        zoomMultiplier = nextMultiplier;
+        fitSlide();
+
+        if (zoomMultiplier > 1) {
+          const scaleRatio = nextMultiplier / previousMultiplier;
+          requestAnimationFrame(() => {
+            stage.scrollLeft = Math.max(0, contentX * scaleRatio - pointerX);
+            stage.scrollTop = Math.max(0, contentY * scaleRatio - pointerY);
+          });
+        }
+      }, { passive: false });
+
+      window.addEventListener("resize", fitSlide);
+      setupImageLightbox();
+      fitSlide();
+    })();
+  </script>
+</body>
+
+</html>
