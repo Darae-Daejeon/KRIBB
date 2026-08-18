@@ -144,11 +144,12 @@
       table-layout: fixed;
     }
 
-    col.patent-name { width: 39%; }
-    col.patent-number { width: 17%; }
-    col.deposit-number { width: 15%; }
-    col.strain-name { width: 19%; }
-    col.open { width: 10%; }
+    col.strain-name { width: 20%; }
+    col.deposit-number { width: 14%; }
+    col.researcher-name { width: 9%; }
+    col.patent-name { width: 34%; }
+    col.patent-number { width: 14%; }
+    col.open { width: 9%; }
 
     th,
     td {
@@ -187,6 +188,7 @@
 
     .number,
     .deposit,
+    .researcher,
     .strain,
     .action {
       text-align: center;
@@ -201,6 +203,11 @@
 
     .strain {
       font-weight: 700;
+    }
+
+    .researcher {
+      font-weight: 800;
+      white-space: nowrap;
     }
 
     .action a {
@@ -335,48 +342,54 @@
     <div class="table-shell">
       <table aria-label="KRIBB 균주소개서 목록">
         <colgroup>
+          <col class="strain-name">
+          <col class="deposit-number">
+          <col class="researcher-name">
           <col class="patent-name">
           <col class="patent-number">
-          <col class="deposit-number">
-          <col class="strain-name">
           <col class="open">
         </colgroup>
         <thead>
           <tr>
-            <th scope="col">특허명</th>
-            <th scope="col">출원·등록번호</th>
-            <th scope="col">기탁번호</th>
             <th scope="col">균주명</th>
+            <th scope="col">기탁번호</th>
+            <th scope="col">연구자</th>
+            <th scope="col">특허명</th>
+            <th scope="col">출원번호</th>
             <th scope="col">자료</th>
           </tr>
         </thead>
         <tbody>
           <tr>
+            <td class="strain"><i>Pseudomonas</i> sp. JBR1</td>
+            <td class="deposit">KCTC 16244BP</td>
+            <td class="researcher">이지영</td>
             <td class="patent-title">염 스트레스 내성을 갖는 신규한 슈도모나스 속 균주 및 이의 용도</td>
             <td class="number">미공개</td>
-            <td class="deposit">KCTC 16244BP</td>
-            <td class="strain"><i>Pseudomonas</i> sp. JBR1</td>
             <td class="action"><a href="smk1.html" aria-label="이지영 박사 균주소개서 보러 가기">보러 가기</a></td>
           </tr>
           <tr>
+            <td class="strain"><i>Bifidobacterium pseudolongum</i> KGMB04131</td>
+            <td class="deposit">KCTC 15133BP</td>
+            <td class="researcher">이정숙</td>
             <td class="patent-title">신규한 비피도박테리움 속 균주, 및 이를 유효성분으로 포함하는 지방간 질환 예방, 개선 또는 치료용 조성물</td>
             <td class="number">출원 2025-0006280</td>
-            <td class="deposit">KCTC 15133BP</td>
-            <td class="strain"><i>Bifidobacterium pseudolongum</i> KGMB04131</td>
             <td class="action"><a href="smk2.html" aria-label="이정숙 박사 균주소개서 보러 가기">보러 가기</a></td>
           </tr>
           <tr>
-            <td class="patent-title">락토바실러스 플란타륨 유래 다당체를 포함하는 항인플루엔자 바이러스용 조성물 및 제조방법</td>
-            <td class="number">등록 10-2007421</td>
-            <td class="deposit">—</td>
             <td class="strain"><i>Lactobacillus plantarum</i> CK401</td>
+            <td class="deposit">—</td>
+            <td class="researcher">김성훈</td>
+            <td class="patent-title">락토바실러스 플란타륨 유래 다당체를 포함하는 항인플루엔자 바이러스용 조성물 및 제조방법</td>
+            <td class="number">확인 예정</td>
             <td class="action"><a href="smk3.html" aria-label="김성훈 박사 균주소개서 보러 가기">보러 가기</a></td>
           </tr>
           <tr>
+            <td class="strain"><i>Companilactobacillus zhachilii</i> L113</td>
+            <td class="deposit">KCTC19197P</td>
+            <td class="researcher">강지영</td>
             <td class="patent-title">프리바이오틱스 LCMP에 영향을 받는 프로바이오틱스 균주 및 이의 용도</td>
             <td class="number">출원 024-0111394</td>
-            <td class="deposit">KCTC19197P</td>
-            <td class="strain"><i>Companilactobacillus zhachilii</i> L113</td>
             <td class="action"><a href="smk4.html" aria-label="강지영 박사 균주소개서 보러 가기">보러 가기</a></td>
           </tr>
         </tbody>
