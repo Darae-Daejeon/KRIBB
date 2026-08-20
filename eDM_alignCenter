@@ -1,0 +1,162 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>한국생명공학연구원 생물자원 기술설명회</title>
+
+  <style>
+    html,
+    body {
+      margin: 0;
+      padding: 0;
+      min-height: 100%;
+    }
+
+    body {
+      position: relative;
+      overflow-x: hidden;
+      background: #0b4f68;
+    }
+
+    /* 왼쪽 배경 */
+    body::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      left: 0;
+      width: 50%;
+      z-index: 0;
+
+      background:
+        /* 미세한 질감 */
+        /* radial-gradient(
+          circle at 25% 35%,
+          rgba(255,255,255,0.055) 0 1px,
+          transparent 1.5px
+        ) 0 0 / 6px 6px, */
+
+        /* 왼쪽 원본 색감 */
+        linear-gradient(
+          to bottom,
+          #00020d 0%,
+          #02201f 15%,
+          #055038 30%,
+          #097753 47%,
+          #0e8369 60%,
+          #137e79 75%,
+          #17778b 88%,
+          #1a789e 100%
+        );
+    }
+
+    /* 오른쪽 배경 */
+    body::after {
+      content: "";
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      right: 0;
+      width: 50%;
+      z-index: 0;
+
+      background:
+        /* 미세한 질감
+        radial-gradient(
+          circle at 75% 30%,
+          rgba(255,255,255,0.05) 0 1px,
+          transparent 1.5px
+        ) 0 0 / 6px 6px, */
+
+        /* 오른쪽 원본 색감 */
+        linear-gradient(
+          to bottom,
+          #0c155a 0%,
+          #0d1760 15%,
+          #0d196b 30%,
+          #142a83 48%,
+          #3e5baf 63%,
+          #91a9e9 77%,
+          #b9cff4 90%,
+          #c0d9f5 100%
+        );
+    }
+
+    .poster-wrap {
+      position: relative;
+      z-index: 1;
+
+      width: 800px;
+      margin: 0 auto;
+    }
+
+    .poster {
+      display: block;
+      width: 800px;
+      height: auto;
+      border: 0;
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="poster-wrap">
+
+    <img
+      class="poster"
+      src="https://raw.githubusercontent.com/Darae-Daejeon/KRIBB/main/eDM_KRIBB.png"
+      width="800"
+      alt="한국생명공학연구원 생물자원 기술설명회"
+      usemap="#kribb-event-map"
+    >
+
+    <map name="kribb-event-map" id="kribb-event-map">
+
+      <area
+        shape="rect"
+        coords="82,586,169,614"
+        href="https://darae-daejeon.github.io/KRIBB/"
+        target="_blank"
+        alt="기술 1 자세히 보기"
+      >
+
+      <area
+        shape="rect"
+        coords="433,586,513,616"
+        href="https://darae-daejeon.github.io/KRIBB/"
+        target="_blank"
+        alt="기술 2 자세히 보기"
+      >
+
+      <area
+        shape="rect"
+        coords="84,859,169,887"
+        href="https://darae-daejeon.github.io/KRIBB/"
+        target="_blank"
+        alt="기술 3 자세히 보기"
+      >
+
+      <area
+        shape="rect"
+        coords="431,858,514,888"
+        href="https://darae-daejeon.github.io/KRIBB/"
+        target="_blank"
+        alt="기술 4 자세히 보기"
+      >
+
+      <area
+        shape="rect"
+        coords="248,1019,544,1076"
+        href="https://forms.gle/LGqWmAsrdCUDUHoa6"
+        target="_blank"
+        alt="사전 신청하기"
+      >
+
+    </map>
+
+  </div>
+
+</body>
+</html>
