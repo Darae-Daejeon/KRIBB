@@ -247,6 +247,38 @@
       outline-offset: 3px;
     }
 
+    .consult-action {
+      display: flex;
+      justify-content: center;
+      margin-bottom: 20px;
+    }
+
+    .consult-action a {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-width: 300px;
+      min-height: 100px;
+      border-radius: 12px;
+      padding: 13px 24px;
+      background: var(--kribb-navy);
+      color: #fff;
+      font-size: 32px;
+      font-weight: 900;
+      white-space: nowrap;
+      transition: background-color 160ms ease;
+    }
+
+    .consult-action a:hover,
+    .consult-action a:focus-visible {
+      background: #0f1f6e;
+    }
+
+    .consult-action a:focus-visible {
+      outline: 3px solid rgba(53, 169, 223, 0.45);
+      outline-offset: 3px;
+    }
+
     footer {
       border-top: 1px solid var(--line);
       background: var(--paper);
@@ -326,6 +358,10 @@
         font-size: 32px;
       }
 
+      .consult-action a {
+        width: 100%;
+      }
+
     }
   </style>
 </head>
@@ -350,6 +386,10 @@
   </section>
 
   <main class="wrap">
+
+        <div class="consult-action">
+      <a href="https://forms.gle/LGqWmAsrdCUDUHoa6" target="_blank" rel="noopener noreferrer">상담 신청하기</a>
+        </div>
     <div class="section-heading">
       <h2>균주소개서</h2>
       <span class="count">총 4건</span>
